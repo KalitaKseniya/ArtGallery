@@ -22,9 +22,5 @@ namespace ArtGallery.Models
             modelBuilder.ApplyConfiguration(new PainterConfiguration());
             modelBuilder.ApplyConfiguration(new ArtMovementConfiguration());
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS2019;Database=GalleryCore;Trusted_Connection=True;");
-        //}
     }
 }
