@@ -1,0 +1,102 @@
+﻿@model ArtGallery.Models.Painter
+
+<form method="post" asp-controller="Admin" asp-action="CreatePainter">
+    <div class="border p-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Добавить художника</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="LastName">Фамилия</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="LastName" />
+                        <span asp-validation-for="LastName"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="FirstName">Имя</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="FirstName" />
+                        <span asp-validation-for="FirstName"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="FathersName">Отчество</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="FathersName" />
+                        <span asp-validation-for="FathersName"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Country">Страна</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Country" />
+                        <span asp-validation-for="Country"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Age">Возраст</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Age" type="number" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="BirthPlace">Место рождения</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="BirthPlace" />
+                        <span asp-validation-for="BirthPlace"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="BirthDate">Дата рождения</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="date" asp-for="BirthDate" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="DeathPlace">Место смерти</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="DeathPlace" />
+                        <span asp-validation-for="DeathPlace"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="DeathDate">Дата смерти</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="DeathDate" type="date" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+                        <div class="col">
+                            <input type="submit" value="Добавить" class="btn btn-info w-100" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Painters" class="btn btn-success w-100"><i class="fas fa-sign-out-alt"></i> Назад</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -9,24 +9,39 @@ using System.Threading.Tasks;
 
 namespace ArtGallery.Controllers
 {
+    public class Geometry
+    {
+        public int Altitude { get; set; } // основание
+        public int Height { get; set; } // высота
+
+        public double GetArea() // вычисление площади треугольника
+        {
+            return Altitude * Height / 2;
+        }
+    }
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly RepositoryContext db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(RepositoryContext _db)
         {
-            _logger = logger;
+            db = _db;
         }
-
+        
+        public IActionResult Painters()
+        {
+            return View(db.Painters.OrderBy(p => p.LastName).ToList());
+        }
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

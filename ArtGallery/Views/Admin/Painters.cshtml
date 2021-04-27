@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Painter>
+@{
+}
+
+<div class="container row p-0 m-0">
+    <div class="col-10">
+        <h2 class="text-primary">Добро пожаловать на страницу художников</h2>
+    </div>
+    <div class="col-6">
+        <a asp-controller="Admin" asp-action="CreatePainter" class="btn btn-primary" >
+        Добавить художника</a>
+    </div>
+</div>
+<div class="col-12" border p-3 mt-3>
+    <form method="post">
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped border">
+                <thead>
+                    <tr class="table-secondary">
+                        <th></th>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                        <th>Отчество</th>
+                        <th>Страна</th>
+                        <th>Возраст</th>
+                        <th>Место рождения</th>
+                        <th>Дата рождения</th>
+                        <th>Место смерти</th>
+                        <th>Дата смерти</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var painter in @Model)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@painter.LastName</td>
+                            <td> @painter.FirstName</td>
+                            <td>@painter.FathersName</td>
+                            <td>@painter.Country</td>
+                            <td>@painter?.Age</td>
+                            <td>@painter.BirthPlace</td>
+                            <td>@painter?.BirthDate?.ToShortDateString()</td>
+                            <td>@painter.DeathPlace</td>
+                            <td>@painter?.DeathDate?.ToShortDateString()</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        }
+        else
+        {
+            <p>В галерее нет художников</p>
+        }
+    </form>
+</div>
