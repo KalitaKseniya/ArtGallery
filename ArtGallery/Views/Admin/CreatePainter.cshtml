@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-8">
                         <input asp-for="LastName" />
-                        <span asp-validation-for="LastName"></span>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-8">
                         <input asp-for="FirstName" />
-                        <span asp-validation-for="FirstName"></span>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-8">
                         <input asp-for="FathersName" />
-                        <span asp-validation-for="FathersName"></span>
+                        <span asp-validation-for="FathersName" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-8">
                         <input asp-for="Country" />
-                        <span asp-validation-for="Country"></span>
+                        <span asp-validation-for="Country" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -50,6 +50,7 @@
                     </div>
                     <div class="col-8">
                         <input asp-for="Age" type="number" />
+                        <span asp-validation-for="Age" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -58,7 +59,7 @@
                     </div>
                     <div class="col-8">
                         <input asp-for="BirthPlace" />
-                        <span asp-validation-for="BirthPlace"></span>
+                        <span asp-validation-for="BirthPlace" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -75,7 +76,7 @@
                     </div>
                     <div class="col-8">
                         <input asp-for="DeathPlace" />
-                        <span asp-validation-for="DeathPlace"></span>
+                        <span asp-validation-for="DeathPlace" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -100,3 +101,7 @@
         </div>
     </div>
 </form>
+
+@section Scripts{ 
+@{ <partial name="_ValidationScriptsPartial.cshtml" />}
+}

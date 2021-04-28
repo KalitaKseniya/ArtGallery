@@ -23,6 +23,6 @@ namespace ArtGallery.Models
         //Required??
         //ToDo путь к картинке добавить
          public Painter Painter { get; set; }
-         public List<ArtMovement> artMovements { get; set; }
+         public List<ArtMovement> ArtMovements { get; set; }
     }
 }

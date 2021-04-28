@@ -22,6 +22,7 @@ namespace ArtGallery.Models
         public string BirthPlace { get; set; }//nullable??
         public DateTime? DeathDate { get; set; }
         [MaxLength(100, ErrorMessage = "Maximum length of death place is 100")]
+        [Range(0,int.MaxValue, ErrorMessage = "Must be non-negative")]
         public string DeathPlace { get; set; }
         public int? Age { get; set; }
         [Required(ErrorMessage ="Please enter country")]
