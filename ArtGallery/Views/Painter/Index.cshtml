@@ -1,10 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-@model List<Painter>
+﻿@model List<Painter>
 @{
 }
 
@@ -13,7 +7,7 @@
         <h2 class="text-primary">Добро пожаловать на страницу художников</h2>
     </div>
     <div class="col-6">
-        <a asp-controller="Admin" asp-action="CreatePainter" class="btn btn-primary" >
+        <a asp-action="Create" class="btn btn-primary" >
         Добавить художника</a>
     </div>
 </div>
@@ -40,7 +34,18 @@
                     @foreach (var painter in @Model)
                     {
                         <tr>
-                            <td></td>
+                            <td>
+                                <div class="text-left">
+                                    <div class="w-75 btn-group" role="group">
+                                        <a asp-route-Id="@painter.Id" asp-action="Edit" class="btn btn-primary mx-2">
+                                            Редактировать
+                                        </a>
+                                        <a asp-route-Id="@painter.Id" asp-action="Delete" onclick="return confirm('Вы уверены, что хотите удалить художника?')" class="btn btn-danger mx-2">
+                                            Удалить
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
                             <td>@painter.LastName</td>
                             <td> @painter.FirstName</td>
                             <td>@painter.FathersName</td>
@@ -59,7 +64,7 @@
         }
         else
         {
-            <p>В галерее нет художников</p>
+            <p>В таблице нет художников</p>
         }
     </form>
 </div>

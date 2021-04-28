@@ -11,33 +11,77 @@ namespace ArtGallery.Controllers
     public class PainterController : Controller
     {
         private readonly RepositoryContext db;
-        public IActionResult Index()
+
+        public PainterController(RepositoryContext _db)
         {
-            return View();
+            db = _db;
         }
 
         [HttpGet]
-        public IActionResult CreatePainter()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreatePainter(Painter painter)
+        public async Task<IActionResult> Create(Painter p)
         {
             if (ModelState.IsValid)
             {
-                db.Painters.Add(painter);
-                db.SaveChanges();
-                return RedirectToAction("Painters");
+                await db.Painters.AddAsync(p);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
-            return View(painter);
+            return View(p);
         }
 
-        public async Task<ViewResult> Painters()
+        public async Task<IActionResult> Index()
         {
-            IEnumerable<Painter> painters = await db.Painters.OrderBy(p => p.LastName).ToListAsync();
-            return View(painters);
+            IEnumerable<Painter> ps = await db.Painters.ToListAsync();
+            return View(ps);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var p = await db.Painters.FindAsync(id);
+            if (p == null)
+            {
+                return NotFound();
+            }
+            return View(p);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(Painter p)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Painters.Update(p);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(p);
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var p = db.Painters.Find(id);
+            if (p == null)
+            {
+                return NotFound();
+            }
+            db.Painters.Remove(p);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
     }
 }

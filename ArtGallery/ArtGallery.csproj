@@ -20,8 +20,4 @@
     <None Include="wwwroot\images\welcome.jpg" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Painting\" />
-  </ItemGroup>
-
 </Project>
