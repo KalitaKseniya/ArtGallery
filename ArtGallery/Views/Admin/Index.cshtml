@@ -5,7 +5,7 @@
         <h2 class="text-primary">Добро пожаловать на страницу администраторов</h2>
     </div>
     <div class="col-6">
-        <a asp-controller="Admin" asp-action="CreateAdmin" class="btn btn-primary">
+        <a asp-controller="Admin" asp-action="Create" class="btn btn-primary">
             Добавить администратора
         </a>
     </div>
@@ -29,10 +29,10 @@
                             <td>
                                 <div class="text-center">
                                     <div class="w-75 btn-group" role="group">
-                                        <a asp-controller="Admin" asp-route-Id="@admin.Id" asp-action="EditAdmin" class="btn btn-primary mx-2">
+                                        <a asp-controller="Admin" asp-route-Id="@admin.Id" asp-action="Edit" class="btn btn-primary mx-2">
                                             Редактировать
                                         </a>
-                                        <a asp-controller="Admin" asp-route-Id="@admin.Id" asp-action="DeleteAdmin" class="btn btn-danger mx-2">
+                                        <a asp-controller="Admin" asp-route-Id="@admin.Id" asp-action="Delete" onclick="return confirm('Вы уверены, что хотите удалить администратора?')" class="btn btn-danger mx-2">
                                             Удалить
                                         </a>
                                     </div>
