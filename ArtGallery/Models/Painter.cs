@@ -28,6 +28,6 @@ namespace ArtGallery.Models
         [Required(ErrorMessage ="Please enter country")]
         [MaxLength(100, ErrorMessage = "Maximum length of Country is 100")]
         public string Country { get; set; }
-        List<Painting> Paintings { get; set; }
+        public virtual List<Painting> Paintings { get; set; }
     }
 }

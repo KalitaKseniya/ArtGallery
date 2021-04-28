@@ -13,6 +13,6 @@ namespace ArtGallery.Models
         [MaxLength(60, ErrorMessage = "Maximum length for the Name is 60 characters")]
         public string Name { get; set; }
 
-        public List<Painting> Paintings{get;set;}
+        public virtual List<Painting> Paintings{get;set;}
     }
 }

@@ -19,10 +19,10 @@ namespace ArtGallery.Models
         public double? Size_x { get; set; }
         public double? Size_y { get; set; }
         public string Description { get; set; }
-        public int PainterId { get; set; }
+        public int? PainterId { get; set; }
         //Required??
         //ToDo путь к картинке добавить
-         public Painter Painter { get; set; }
-         public List<ArtMovement> ArtMovements { get; set; }
+         public virtual Painter Painter { get; set; }
+         public virtual List<ArtMovement> ArtMovements { get; set; }
     }
 }
