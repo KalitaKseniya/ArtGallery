@@ -1,4 +1,9 @@
 ﻿@model Painting
+<left>
+        <a asp-route-Id="@Model.Id" asp-action="PaintingReport" class="btn btn-primary mx-2">
+            Отчет
+        </a>
+    </left>
 <center>
     <p>
         @Model.Name, @Model.Year
@@ -13,6 +18,6 @@
     @Model.Description
 
 
-    <a asp-action="Painting" asp-route-id="@ViewBag.Prev">Предыдущая</a>
-    <a asp-action="Painting" asp-route-id="@ViewBag.Next">Следующая</a>
+    <a asp-action="Painting" asp-route-id="@ViewBag.Prev" class="btn btn-primary mx-2">Предыдущая</a>
+    <a asp-action="Painting" asp-route-id="@ViewBag.Next" class="btn btn-primary mx-2">Следующая</a>
 </center>

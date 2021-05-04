@@ -50,8 +50,8 @@ namespace ArtGallery.Controllers
 
             //Draw the text
             string str = $"Имя: {p.FirstName}.\nФамилия: {p.LastName}.\n Отчество: {p.FathersName}.\n " +
-                $"Возраст: {p.Age}.\n Место рождения: {p.BirthPlace}.\n Дата рождения: {p.BirthDate}.\n " +
-                $"Страна: {p.Country}.\n Дата смерти: {p.DeathDate}.\n Место смерти:{p.DeathPlace}.\n Картины:";
+                $"Возраст: {p.Age}.\n Место рождения: {p.BirthPlace}.\n Дата рождения: {p.BirthDate.Value.ToLongDateString()}.\n " +
+                $"Страна: {p.Country}.\n Дата смерти: {p.DeathDate.Value.ToLongDateString()}.\n Место смерти: {p.DeathPlace}.\n Картины: ";
             foreach(var painting in p.Paintings) 
             {
                 str += $"\n\t\"{painting.Name}\"";
@@ -70,7 +70,7 @@ namespace ArtGallery.Controllers
 
             //Download the PDF document in the browser.
             FileStreamResult fileStreamResult = new FileStreamResult(stream, "application/pdf");
-            fileStreamResult.FileDownloadName = $"Report {Translit($"Report {p.LastName}")}.pdf";
+            fileStreamResult.FileDownloadName = $"Report {Translit($"{p.LastName}")}.pdf";
             return fileStreamResult;
 
         }
@@ -121,8 +121,54 @@ namespace ArtGallery.Controllers
             ViewBag.Prev = (id == 1)? cnt : (id - 1);
             return View(painting);
         }
+
+        [HttpGet("{id}")]
+        public ActionResult PaintingReport(int? id)
+        {
+            var p = db.Paintings.Find(id);
+            if (p == null)
+            {
+                return NotFound();
+            }
+            //Create a new PDF document
+            PdfDocument document = new PdfDocument();
+
+            //Add a page to the document
+            PdfPage page = document.Pages.Add();
+
+            //Create PDF graphics for the page
+            PdfGraphics graphics = page.Graphics;
+
+            //Set the standard font
+            PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+
+            //Draw the text
+            string str = $"Название: {p.Name}.\nХудожник: {p.Painter.FirstName} {p.Painter.LastName}.\n Материал: {p.Medium}.\n " +
+                $"Год написания: {p.Year}.\n Размер: {p.Size_x} см x {p.Size_y} см.";
+            foreach (var am in p.ArtMovements)
+            {
+                str += $"\n\t\"{am.Name}\"";
+            }
+            str += ".";
+            string str1 = Translit(str);//cyrillic ->latin
+            graphics.DrawString(str1, font, PdfBrushes.Black, new PointF(0, 0));
+
+            //Saving the PDF to the MemoryStream
+            MemoryStream stream = new MemoryStream();
+
+            document.Save(stream);
+
+            //If the position is not set to '0' then the PDF will be empty.
+            stream.Position = 0;
+
+            //Download the PDF document in the browser.
+            FileStreamResult fileStreamResult = new FileStreamResult(stream, "application/pdf");
+            fileStreamResult.FileDownloadName = $"Report \"{Translit($"{p.Name}")} \".pdf";
+            return fileStreamResult;
+
+        }
         [Route("")]
-        [Route("Index")]
+        //[Route("Index")]
         public IActionResult Index()
         {
             return View();
