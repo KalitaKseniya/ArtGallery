@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ArtGallery.Controllers
 {
-    //[Route("Admin")]
+    [Route("[controller]/[action]")]
     public class AdminController : Controller
     {
         private readonly RepositoryContext db;
@@ -18,6 +18,7 @@ namespace ArtGallery.Controllers
             db = _db;
         }
 
+        
         [HttpGet]
         public IActionResult Create()
         {
@@ -35,7 +36,6 @@ namespace ArtGallery.Controllers
             }
             return View(admin);
         }
-
         public async Task<IActionResult> Index()
         {
             IEnumerable<Admin> admins = await db.Admins.ToListAsync();

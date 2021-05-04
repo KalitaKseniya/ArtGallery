@@ -9,11 +9,9 @@ using System.Threading.Tasks;
 
 
 namespace ArtGallery.Controllers
-{//public class ArtList
-//    {
-//        public SelectList ArtMovementList { get; set; }
-//        public List<int> SelectedArtMovementIds { get; set; }
-//    }
+{
+    [Route("[controller]/[action]")]
+
     public class PaintingController : Controller
     {
         private readonly RepositoryContext db;

@@ -7,9 +7,14 @@ using ArtGallery.Models;
 
 namespace ArtGallery.Controllers
 {
+    [Route("[controller]/[action]")]
     public class AuthController : Controller
     {
         private readonly RepositoryContext db;
+        public AuthController(RepositoryContext db_)
+        {
+            db = db_;
+        }
         public IActionResult Index()
         {
             return View();

@@ -10,16 +10,8 @@ using System.Threading.Tasks;
 
 namespace ArtGallery.Controllers
 {
-    public class Geometry
-    {
-        public int Altitude { get; set; } // основание
-        public int Height { get; set; } // высота
-
-        public double GetArea() // вычисление площади треугольника
-        {
-            return Altitude * Height / 2;
-        }
-    }
+    [Route("{action=Index}")]
+    [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -30,37 +22,39 @@ namespace ArtGallery.Controllers
             db = _db;
         }
         [HttpGet]
-        public IActionResult painters_list()
+        public IActionResult Painters()
         {
             return View(db.Painters.OrderBy(p => p.LastName).ToList());
         }
         [HttpGet]
-        public IActionResult paintings_list()
+        public IActionResult Paintings()
         {
             var paintings = db.Paintings.ToList();
             return View(paintings);
         }
         [HttpGet]
-        public async Task<IActionResult> artMovements_list()
+        public async Task<IActionResult> ArtMovements()
         {
-            var arts =await db.ArtMovements.ToListAsync();
+            var arts = await db.ArtMovements.ToListAsync();
             return View(arts);
         }
-        
         [HttpGet("{id}")]
-        public IActionResult painting(int? id)
+        public IActionResult Painting(int? id)
         {
             var painting = db.Paintings.Find(id);
             if(painting == null)
             {
                 return NotFound();
             }
-            List<Painting> p = db.Paintings.ToList();
+            //List<Painting> p = db.Paintings.ToList();
             var cnt = db.Paintings.Count();
             ViewBag.Next = (id == cnt)? 1 : (id + 1);
             ViewBag.Prev = (id == 1)? cnt : (id - 1);
             return View(painting);
         }
+        [Route("")]
+        [Route("Index")]
+        [Route("Home/Index")]
         public IActionResult Index()
         {
             return View();
@@ -71,10 +65,10 @@ namespace ArtGallery.Controllers
         //    return View();
         //}
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }

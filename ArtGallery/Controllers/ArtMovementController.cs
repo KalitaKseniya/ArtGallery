@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ArtGallery.Controllers
 {
+    [Route("[controller]/[action]")]
     public class ArtMovementController : Controller
     {
         private readonly RepositoryContext db;
