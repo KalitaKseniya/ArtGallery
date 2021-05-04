@@ -1,0 +1,18 @@
+﻿@model Painting
+<center>
+    <p>
+        @Model.Name, @Model.Year
+    </p>
+    <p>
+        @Model.Painter.FirstName @Model.Painter.FirstName
+    </p>
+    <p>
+        @Model.Medium, @Model.Size_x. x @Model.Size_y
+    </p>
+
+    @Model.Description
+
+
+    <a asp-action="painting" asp-route-id="@ViewBag.Prev">Предыдущая</a>
+    <a asp-action="painting" asp-route-id="@ViewBag.Next">Следующая</a>
+</center>

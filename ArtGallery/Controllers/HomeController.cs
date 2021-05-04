@@ -1,5 +1,6 @@
 ﻿using ArtGallery.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -28,10 +29,37 @@ namespace ArtGallery.Controllers
         {
             db = _db;
         }
-        
-        public IActionResult Painters()
+        [HttpGet]
+        public IActionResult painters_list()
         {
             return View(db.Painters.OrderBy(p => p.LastName).ToList());
+        }
+        [HttpGet]
+        public IActionResult paintings_list()
+        {
+            var paintings = db.Paintings.ToList();
+            return View(paintings);
+        }
+        [HttpGet]
+        public async Task<IActionResult> artMovements_list()
+        {
+            var arts =await db.ArtMovements.ToListAsync();
+            return View(arts);
+        }
+        
+        [HttpGet("{id}")]
+        public IActionResult painting(int? id)
+        {
+            var painting = db.Paintings.Find(id);
+            if(painting == null)
+            {
+                return NotFound();
+            }
+            List<Painting> p = db.Paintings.ToList();
+            var cnt = db.Paintings.Count();
+            ViewBag.Next = (id == cnt)? 1 : (id + 1);
+            ViewBag.Prev = (id == 1)? cnt : (id - 1);
+            return View(painting);
         }
         public IActionResult Index()
         {

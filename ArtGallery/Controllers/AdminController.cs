@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ArtGallery.Controllers
 {
+    //[Route("Admin")]
     public class AdminController : Controller
     {
         private readonly RepositoryContext db;

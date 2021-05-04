@@ -1,0 +1,61 @@
+﻿@model List<Painting>
+@{
+}
+
+<div class="container row p-0 m-0">
+    <div class="col-10">
+        <h2 class="text-primary">Добро пожаловать на страницу картин</h2>
+    </div>
+
+</div>
+<div class="col-12" border p-3 mt-3>
+    <form>
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped border">
+                <thead>
+                    <tr class="table-secondary">
+                        <th>Название</th>
+                        <th>Год</th>
+                        <th>Материал</th>
+                        <th>Длина</th>
+                        <th>Ширина</th>
+                        <th>Описание</th>
+                        <th>Художник</th>
+                        <th>Направления</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var painting in @Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="painting" asp-route-id="@painting.Id">
+                                    @painting.Name
+                                </a>
+                            </td>
+                            <td> @painting.Year</td>
+                            <td>@painting.Medium</td>
+                            <td>@painting?.Size_x</td>
+                            <td>@painting?.Size_y</td>
+                            <td>@painting.Description</td>
+                            <td>@painting?.Painter?.LastName @painting?.Painter?.FirstName</td>
+                            <td>
+                                @foreach (var art in painting.ArtMovements)
+                                {
+                                    <p>@art.Name</p>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        }
+        else
+        {
+            <p>В таблице нет картин</p>
+        }
+    </form>
+</div>
