@@ -10,6 +10,7 @@
             <table class="table table-striped border">
                 <thead>
                     <tr class="table-secondary">
+                        <th></th>
                         <th>Фамилия</th>
                         <th>Имя</th>
                         <th>Отчество</th>
@@ -25,6 +26,13 @@
                     @foreach (var painter in @Model)
                     {
                         <tr>
+                            <td>
+                                <div class="w-75 btn-group" role="group">
+                                    <a asp-route-Id="@painter.Id" asp-action="PainterReport" class="btn btn-primary mx-2">
+                                        Отчет
+                                    </a>
+                                </div>
+                            </td>
                             <td>@painter.LastName</td>
                             <td> @painter.FirstName</td>
                             <td>@painter.FathersName</td>

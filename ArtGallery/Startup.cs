@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Wkhtmltopdf.NetCore;
 
 namespace ArtGallery
 {
@@ -25,7 +26,10 @@ namespace ArtGallery
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureSqlContext(Configuration);
-            services.AddControllersWithViews();
+            services.AddControllers();
+            //services.AddControllersWithViews();
+            //services.AddWkhtmltopdf("C:\\Users\\Kalit\\source\repos\\ArtGallery\\ArtGallery\\wkhtmptopdf\\Windows\\wkhtmltopdf.exe");
+            services.AddWkhtmltopdf("Rotativa");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +58,7 @@ namespace ArtGallery
                     //name: "default",
                     //pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            //RotativaConfiguration.Setup((Microsoft.AspNetCore.Hosting.IHostingEnvironment)env);
         }
     }
 }
